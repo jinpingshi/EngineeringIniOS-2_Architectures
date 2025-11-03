@@ -1,0 +1,24 @@
+//
+//  ContentView.swift
+//  ContactsArchitectureDemo
+//
+//  Created by Jinping Shi on 2025/11/3.
+//
+
+import SwiftUI
+
+struct ContentView: View {
+    var body: some View {
+        VStack {
+            Image(systemName: "globe")
+                .imageScale(.large)
+                .foregroundStyle(.tint)
+            Text("Hello, world!")
+        }
+        .padding()
+    }
+}
+
+#Preview {
+    ContentView()
+}
