@@ -16,41 +16,41 @@ struct ContentView: View {
                     .fontWeight(.bold)
                     .padding(.top, 50)
                 
-                Text("SwiftUI Demo")
+                Text("Comparison Demo")
                     .font(.title3)
                     .foregroundColor(.secondary)
                 
                 Spacer()
                 
                 VStack(spacing: 20) {
-                    // MVC Button
-                    NavigationLink(destination: ContactMVCView()) {
+                    // MVC Button (UIKit - Pure MVC with View + Controller)
+                    NavigationLink(destination: ContactMVCViewControllerWrapper()) {
                         ArchitectureCard(
                             title: "MVC Architecture",
-                            subtitle: "Model-View-Controller",
-                            description: "All logic in Controller",
+                            subtitle: "UIKit - View + Controller",
+                            description: "Shows Massive View Controller",
                             color: .blue,
                             icon: "square.stack.3d.up"
                         )
                     }
                     
-                    // MVVM Button
+                    // MVVM Button (SwiftUI)
                     NavigationLink(destination: ContactMVVMView()) {
                         ArchitectureCard(
                             title: "MVVM Architecture",
-                            subtitle: "Model-View-ViewModel",
-                            description: "Logic separated in ViewModel",
+                            subtitle: "SwiftUI - View + ViewModel",
+                            description: "Modern data binding approach",
                             color: .green,
                             icon: "square.stack.3d.forward.dottedline"
                         )
                     }
                     
-                    // VIPER Button
+                    // VIPER Button (SwiftUI)
                     NavigationLink(destination: ContactVIPERView.build()) {
                         ArchitectureCard(
                             title: "VIPER Architecture",
-                            subtitle: "V-I-P-E-R",
-                            description: "Five separate components",
+                            subtitle: "SwiftUI - 5 Components",
+                            description: "Enterprise-level separation",
                             color: .orange,
                             icon: "square.stack.3d.down.right"
                         )
@@ -63,6 +63,20 @@ struct ContentView: View {
             .navigationBarHidden(true)
         }
         .navigationViewStyle(StackNavigationViewStyle())
+    }
+}
+
+// MARK: - UIKit Bridge (Minimal wrapper to present UIKit ViewController in SwiftUI)
+struct ContactMVCViewControllerWrapper: UIViewControllerRepresentable {
+    
+    func makeUIViewController(context: Context) -> UINavigationController {
+        let viewController = ContactMVCViewController()
+        let navigationController = UINavigationController(rootViewController: viewController)
+        return navigationController
+    }
+    
+    func updateUIViewController(_ uiViewController: UINavigationController, context: Context) {
+        // No updates needed
     }
 }
 
@@ -104,12 +118,5 @@ struct ArchitectureCard: View {
         .frame(maxWidth: .infinity)
         .background(color)
         .cornerRadius(12)
-    }
-}
-
-// MARK: - Preview
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
     }
 }
